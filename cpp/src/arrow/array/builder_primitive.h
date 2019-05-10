@@ -53,7 +53,9 @@ template <typename T>
 class NumericBuilder : public ArrayBuilder {
  public:
   using value_type = typename T::c_type;
-  using ArrayBuilder::ArrayBuilder;
+
+  explicit NumericBuilder(const std::shared_ptr<DataType>& type, MemoryPool* pool)
+    : ArrayBuilder(type, pool), data_builder_(pool) {}
 
   template <typename T1 = T>
   explicit NumericBuilder(
